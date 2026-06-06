@@ -1,0 +1,976 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>HelloHomeRent – Registrazione Ospiti / Guest Registration / Gästeregistrierung</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --gold: #B8935A;
+    --gold-light: #D4AE7A;
+    --gold-pale: #F5EDD8;
+    --ink: #1A1612;
+    --ink-soft: #4A3F35;
+    --ink-muted: #9A8F85;
+    --cream: #FDFAF4;
+    --cream-dark: #F0EAD8;
+    --white: #FFFFFF;
+    --border: rgba(184,147,90,0.25);
+    --border-soft: rgba(184,147,90,0.12);
+    --success: #3A6B3A;
+    --success-bg: #EAF3EA;
+    --error: #8B2020;
+    --error-bg: #F3EAEA;
+    --radius: 4px;
+    --radius-lg: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    min-height: 100vh;
+  }
+
+  /* Background texture */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 80% 60% at 20% 10%, rgba(184,147,90,0.06) 0%, transparent 60%),
+      radial-gradient(ellipse 60% 50% at 80% 90%, rgba(184,147,90,0.05) 0%, transparent 60%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .page-wrapper {
+    position: relative;
+    z-index: 1;
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 48px 24px 80px;
+  }
+
+  /* ── Header ── */
+  .header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .logo-mark {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+
+  .logo-houses {
+    display: flex;
+    gap: 3px;
+    align-items: flex-end;
+  }
+
+  .house {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+  }
+
+  .house-roof {
+    width: 0;
+    height: 0;
+    border-left: solid transparent;
+    border-right: solid transparent;
+    border-bottom: solid var(--gold);
+  }
+
+  .house-body {
+    background: var(--gold);
+    border-radius: 0 0 1px 1px;
+  }
+
+  .house:nth-child(1) .house-roof { border-left-width: 7px; border-right-width: 7px; border-bottom-width: 6px; }
+  .house:nth-child(1) .house-body { width: 12px; height: 9px; }
+
+  .house:nth-child(2) .house-roof { border-left-width: 9px; border-right-width: 9px; border-bottom-width: 8px; }
+  .house:nth-child(2) .house-body { width: 16px; height: 11px; }
+
+  .house:nth-child(3) .house-roof { border-left-width: 7px; border-right-width: 7px; border-bottom-width: 6px; }
+  .house:nth-child(3) .house-body { width: 12px; height: 9px; }
+
+  .logo-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 22px;
+    letter-spacing: 0.04em;
+    color: var(--ink);
+  }
+
+  .logo-text span { color: var(--gold); }
+
+  .header-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 500;
+    font-size: 32px;
+    line-height: 1.2;
+    color: var(--ink);
+    margin-bottom: 10px;
+  }
+
+  .header-subtitle {
+    font-size: 13px;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto;
+  }
+
+  .lang-divider {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin: 16px auto 0;
+    max-width: 400px;
+  }
+
+  .lang-divider::before,
+  .lang-divider::after {
+    content: '';
+    flex: 1;
+    height: 0.5px;
+    background: var(--border);
+  }
+
+  .lang-pills {
+    display: flex;
+    gap: 6px;
+  }
+
+  .lang-pill {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    color: var(--gold);
+    background: var(--gold-pale);
+    border: 0.5px solid var(--border);
+    border-radius: 20px;
+    padding: 3px 10px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+
+  .lang-pill.active, .lang-pill:hover {
+    background: var(--gold);
+    color: var(--white);
+    border-color: var(--gold);
+  }
+
+  /* ── Form card ── */
+  .form-card {
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .form-card-header {
+    background: var(--gold-pale);
+    border-bottom: 0.5px solid var(--border);
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .form-card-header .section-icon {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--gold);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-size: 13px;
+  }
+
+  .form-card-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 17px;
+    color: var(--ink-soft);
+    letter-spacing: 0.02em;
+  }
+
+  .form-card-body {
+    padding: 24px;
+  }
+
+  .field-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .field-row.full { grid-template-columns: 1fr; }
+
+  @media (max-width: 560px) {
+    .field-row { grid-template-columns: 1fr; }
+  }
+
+  .field-group { display: flex; flex-direction: column; gap: 5px; }
+
+  label {
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ink-muted);
+  }
+
+  label .req { color: var(--gold); margin-left: 2px; }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="tel"],
+  input[type="date"],
+  input[type="number"],
+  select {
+    height: 40px;
+    border: 0.5px solid rgba(74,63,53,0.25);
+    border-radius: var(--radius);
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 300;
+    padding: 0 12px;
+    outline: none;
+    transition: border-color 0.15s, background 0.15s;
+    width: 100%;
+  }
+
+  input:focus, select:focus {
+    border-color: var(--gold);
+    background: var(--white);
+  }
+
+  select { cursor: pointer; }
+
+  /* ── Upload zone ── */
+  .upload-zone {
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-lg);
+    padding: 28px 20px;
+    text-align: center;
+    background: var(--cream);
+    cursor: pointer;
+    transition: all 0.15s;
+    position: relative;
+  }
+
+  .upload-zone:hover, .upload-zone.dragover {
+    border-color: var(--gold);
+    background: var(--gold-pale);
+  }
+
+  .upload-zone input[type="file"] {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+    width: 100%;
+    height: 100%;
+  }
+
+  .upload-icon {
+    font-size: 28px;
+    margin-bottom: 8px;
+    color: var(--gold);
+  }
+
+  .upload-label-main {
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink-soft);
+    margin-bottom: 4px;
+  }
+
+  .upload-label-sub {
+    font-size: 11px;
+    color: var(--ink-muted);
+  }
+
+  .file-list {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+  }
+
+  .file-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--white);
+    border: 0.5px solid var(--border);
+    border-radius: var(--radius);
+    padding: 7px 12px;
+    font-size: 12px;
+    color: var(--ink-soft);
+  }
+
+  .file-item .file-name { flex: 1; text-align: left; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .file-item .file-size { color: var(--ink-muted); flex-shrink: 0; }
+  .file-item .remove-file { color: var(--ink-muted); cursor: pointer; font-size: 14px; flex-shrink: 0; }
+  .file-item .remove-file:hover { color: var(--error); }
+
+  /* ── Guest repeat section ── */
+  .guest-section {
+    border: 0.5px solid var(--border-soft);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+
+  .guest-header {
+    background: var(--cream-dark);
+    border-bottom: 0.5px solid var(--border-soft);
+    padding: 10px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .guest-header h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-weight: 600;
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+
+  .guest-body { padding: 20px; }
+
+  .add-guest-btn {
+    width: 100%;
+    padding: 13px;
+    border: 1px dashed var(--border);
+    border-radius: var(--radius-lg);
+    background: transparent;
+    color: var(--gold);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s;
+    letter-spacing: 0.02em;
+  }
+
+  .add-guest-btn:hover {
+    background: var(--gold-pale);
+    border-color: var(--gold);
+  }
+
+  .remove-guest-btn {
+    background: none;
+    border: none;
+    color: var(--ink-muted);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 2px 6px;
+    border-radius: var(--radius);
+    transition: color 0.15s, background 0.15s;
+  }
+
+  .remove-guest-btn:hover { color: var(--error); background: var(--error-bg); }
+
+  /* ── Submit ── */
+  .submit-area { margin-top: 24px; }
+
+  .legal-note {
+    font-size: 11px;
+    color: var(--ink-muted);
+    line-height: 1.6;
+    margin-bottom: 16px;
+    padding: 12px 16px;
+    background: var(--cream-dark);
+    border-radius: var(--radius);
+    border-left: 2px solid var(--gold-light);
+  }
+
+  .submit-btn {
+    width: 100%;
+    height: 50px;
+    background: var(--gold);
+    color: var(--white);
+    border: none;
+    border-radius: var(--radius-lg);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    cursor: pointer;
+    transition: background 0.15s, transform 0.1s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .submit-btn:hover { background: var(--gold-light); }
+  .submit-btn:active { transform: scale(0.99); }
+  .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+  .spinner {
+    display: none;
+    width: 18px;
+    height: 18px;
+    border: 2px solid rgba(255,255,255,0.4);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: spin 0.7s linear infinite;
+    margin: 0 auto;
+  }
+
+  @keyframes spin { to { transform: rotate(360deg); } }
+
+  /* ── Success / Error messages ── */
+  .alert {
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    margin-top: 16px;
+    font-size: 13px;
+    line-height: 1.6;
+    display: none;
+  }
+
+  .alert.success { background: var(--success-bg); border: 0.5px solid rgba(58,107,58,0.3); color: var(--success); }
+  .alert.error { background: var(--error-bg); border: 0.5px solid rgba(139,32,32,0.3); color: var(--error); }
+  .alert.show { display: block; }
+
+  .success-icon { font-size: 24px; margin-bottom: 8px; }
+
+  /* ── Footer ── */
+  .footer {
+    text-align: center;
+    margin-top: 40px;
+    font-size: 11px;
+    color: var(--ink-muted);
+  }
+
+  .footer a { color: var(--gold); text-decoration: none; }
+
+  /* ── Progress bar ── */
+  .progress-bar {
+    height: 2px;
+    background: var(--border-soft);
+    border-radius: 2px;
+    margin-bottom: 32px;
+    overflow: hidden;
+  }
+
+  .progress-fill {
+    height: 100%;
+    background: var(--gold);
+    border-radius: 2px;
+    transition: width 0.4s ease;
+    width: 0%;
+  }
+</style>
+</head>
+<body>
+<div class="page-wrapper">
+
+  <!-- Header -->
+  <header class="header">
+    <div class="logo-mark">
+      <div class="logo-houses">
+        <div class="house"><div class="house-roof"></div><div class="house-body"></div></div>
+        <div class="house"><div class="house-roof"></div><div class="house-body"></div></div>
+        <div class="house"><div class="house-roof"></div><div class="house-body"></div></div>
+      </div>
+      <div class="logo-text">Hello<span>Home</span>Rent</div>
+    </div>
+
+    <h1 class="header-title" id="page-title">Registrazione Ospiti</h1>
+    <p class="header-subtitle" id="page-subtitle">
+      Carica un documento d'identità valido per ogni ospite. I dati sono trattati nel rispetto della normativa vigente ai sensi del T.U.L.P.S.
+    </p>
+
+    <div class="lang-divider">
+      <div class="lang-pills">
+        <button class="lang-pill active" onclick="setLang('it')">IT</button>
+        <button class="lang-pill" onclick="setLang('en')">EN</button>
+        <button class="lang-pill" onclick="setLang('de')">DE</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="progress-bar"><div class="progress-fill" id="progress"></div></div>
+
+  <form id="mainForm" novalidate>
+
+    <!-- Sezione 1: Prenotazione -->
+    <div class="form-card">
+      <div class="form-card-header">
+        <div class="section-icon">①</div>
+        <h2 id="s1-title">Dettagli Prenotazione</h2>
+      </div>
+      <div class="form-card-body">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="property"><span id="l-property">Struttura</span> <span class="req">*</span></label>
+            <input type="text" id="property" name="property" placeholder="Es. Villa Lago, Apt. Desenzano 2..." required>
+          </div>
+          <div class="field-group">
+            <label for="checkin"><span id="l-checkin">Data check-in</span> <span class="req">*</span></label>
+            <input type="date" id="checkin" name="checkin" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="checkout"><span id="l-checkout">Data check-out</span></label>
+            <input type="date" id="checkout" name="checkout">
+          </div>
+          <div class="field-group">
+            <label for="num-guests"><span id="l-numguests">N° totale ospiti</span> <span class="req">*</span></label>
+            <input type="number" id="num-guests" name="num_guests" min="1" max="30" placeholder="2" required>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sezione 2: Intestatario -->
+    <div class="form-card">
+      <div class="form-card-header">
+        <div class="section-icon">②</div>
+        <h2 id="s2-title">Intestatario Prenotazione</h2>
+      </div>
+      <div class="form-card-body">
+        <div class="field-row">
+          <div class="field-group">
+            <label for="firstname"><span id="l-firstname">Nome</span> <span class="req">*</span></label>
+            <input type="text" id="firstname" name="firstname" required>
+          </div>
+          <div class="field-group">
+            <label for="lastname"><span id="l-lastname">Cognome</span> <span class="req">*</span></label>
+            <input type="text" id="lastname" name="lastname" required>
+          </div>
+        </div>
+        <div class="field-row">
+          <div class="field-group">
+            <label for="email"><span id="l-email">Email</span> <span class="req">*</span></label>
+            <input type="email" id="email" name="email" required>
+          </div>
+          <div class="field-group">
+            <label for="phone"><span id="l-phone">Telefono</span> <span class="req">*</span></label>
+            <input type="tel" id="phone" name="phone" placeholder="+39..." required>
+          </div>
+        </div>
+        <div class="field-row full">
+          <div class="field-group">
+            <label><span id="l-doc-main">Documento d'identità</span> <span class="req">*</span></label>
+            <div class="upload-zone" id="zone-main" ondragover="handleDragOver(event,'zone-main')" ondragleave="handleDragLeave('zone-main')" ondrop="handleDrop(event,'main-doc')">
+              <input type="file" id="main-doc" name="main_doc" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="handleFiles(this,'zone-main','files-main')">
+              <div class="upload-icon">📎</div>
+              <div class="upload-label-main" id="l-upload-main">Trascina qui o clicca per caricare</div>
+              <div class="upload-label-sub" id="l-upload-sub">JPG, PNG o PDF – max 10 MB per file</div>
+            </div>
+            <div class="file-list" id="files-main"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sezione 3: Accompagnatori -->
+    <div class="form-card">
+      <div class="form-card-header">
+        <div class="section-icon">③</div>
+        <h2 id="s3-title">Accompagnatori</h2>
+      </div>
+      <div class="form-card-body">
+        <div id="companions-container"></div>
+        <button type="button" class="add-guest-btn" id="add-guest-btn" onclick="addGuest()">
+          + <span id="l-add-guest">Aggiungi accompagnatore</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Submit -->
+    <div class="submit-area">
+      <p class="legal-note" id="legal-note">
+        I dati e i documenti forniti sono utilizzati esclusivamente per gli adempimenti previsti dalla normativa italiana (T.U.L.P.S. art. 109, D.M. 7/1/2013) e per la comunicazione alle autorità di pubblica sicurezza. Non vengono ceduti a terzi.
+      </p>
+      <button type="submit" class="submit-btn" id="submit-btn">
+        <span id="submit-text">Invia Documenti</span>
+        <div class="spinner" id="spinner"></div>
+      </button>
+    </div>
+
+  </form>
+
+  <div class="alert success" id="alert-success">
+    <div class="success-icon">✓</div>
+    <strong id="success-title">Documenti inviati con successo!</strong><br>
+    <span id="success-body">Grazie. Abbiamo ricevuto i tuoi documenti. Ci vediamo al check-in!</span>
+  </div>
+
+  <div class="alert error" id="alert-error">
+    <strong id="error-title">Errore nell'invio.</strong> <span id="error-body">Riprova o contatta HelloHomeRent.</span>
+  </div>
+
+  <footer class="footer">
+    <p>© HelloHomeRent · <a href="https://hellohomerent.com" target="_blank">hellohomerent.com</a> · Lake Garda</p>
+  </footer>
+
+</div>
+
+<script>
+// ── i18n ──────────────────────────────────────────────────────────────
+const TRANSLATIONS = {
+  it: {
+    pageTitle: 'Registrazione Ospiti',
+    pageSubtitle: 'Carica un documento d\'identità valido per ogni ospite. I dati sono trattati nel rispetto della normativa vigente ai sensi del T.U.L.P.S.',
+    s1: 'Dettagli Prenotazione',
+    s2: 'Intestatario Prenotazione',
+    s3: 'Accompagnatori',
+    property: 'Struttura',
+    checkin: 'Data check-in',
+    checkout: 'Data check-out',
+    numguests: 'N° totale ospiti',
+    firstname: 'Nome',
+    lastname: 'Cognome',
+    email: 'Email',
+    phone: 'Telefono',
+    docMain: 'Documento d\'identità',
+    uploadMain: 'Trascina qui o clicca per caricare',
+    uploadSub: 'JPG, PNG o PDF – max 10 MB per file',
+    addGuest: 'Aggiungi accompagnatore',
+    companion: 'Accompagnatore',
+    companionDoc: 'Documento d\'identità',
+    remove: 'Rimuovi',
+    legal: 'I dati e i documenti forniti sono utilizzati esclusivamente per gli adempimenti previsti dalla normativa italiana (T.U.L.P.S. art. 109, D.M. 7/1/2013) e per la comunicazione alle autorità di pubblica sicurezza. Non vengono ceduti a terzi.',
+    submit: 'Invia Documenti',
+    successTitle: 'Documenti inviati con successo!',
+    successBody: 'Grazie. Abbiamo ricevuto i tuoi documenti. Ci vediamo al check-in!',
+    errorTitle: 'Errore nell\'invio.',
+    errorBody: 'Riprova o contatta HelloHomeRent.',
+    validationMsg: 'Compila tutti i campi obbligatori e carica il documento dell\'intestatario.',
+  },
+  en: {
+    pageTitle: 'Guest Registration',
+    pageSubtitle: 'Please upload a valid ID document for each guest. Data is processed in compliance with applicable Italian law (T.U.L.P.S.).',
+    s1: 'Booking Details',
+    s2: 'Lead Guest',
+    s3: 'Additional Guests',
+    property: 'Property',
+    checkin: 'Check-in date',
+    checkout: 'Check-out date',
+    numguests: 'Total guests',
+    firstname: 'First name',
+    lastname: 'Last name',
+    email: 'Email',
+    phone: 'Phone',
+    docMain: 'Identity document',
+    uploadMain: 'Drag & drop or click to upload',
+    uploadSub: 'JPG, PNG or PDF – max 10 MB per file',
+    addGuest: 'Add guest',
+    companion: 'Guest',
+    companionDoc: 'Identity document',
+    remove: 'Remove',
+    legal: 'The data and documents provided are used exclusively for compliance with Italian law (T.U.L.P.S. art. 109, D.M. 7/1/2013) and reporting to public security authorities. They are not shared with third parties.',
+    submit: 'Submit Documents',
+    successTitle: 'Documents submitted successfully!',
+    successBody: 'Thank you. We have received your documents. See you at check-in!',
+    errorTitle: 'Submission error.',
+    errorBody: 'Please try again or contact HelloHomeRent.',
+    validationMsg: 'Please fill all required fields and upload the lead guest\'s document.',
+  },
+  de: {
+    pageTitle: 'Gästeregistrierung',
+    pageSubtitle: 'Bitte laden Sie für jeden Gast ein gültiges Ausweisdokument hoch. Die Daten werden gemäß dem italienischen Gesetz (T.U.L.P.S.) verarbeitet.',
+    s1: 'Buchungsdetails',
+    s2: 'Hauptgast',
+    s3: 'Weitere Gäste',
+    property: 'Unterkunft',
+    checkin: 'Check-in-Datum',
+    checkout: 'Check-out-Datum',
+    numguests: 'Anzahl Gäste gesamt',
+    firstname: 'Vorname',
+    lastname: 'Nachname',
+    email: 'E-Mail',
+    phone: 'Telefon',
+    docMain: 'Ausweisdokument',
+    uploadMain: 'Hier ablegen oder klicken zum Hochladen',
+    uploadSub: 'JPG, PNG oder PDF – max. 10 MB pro Datei',
+    addGuest: 'Weiteren Gast hinzufügen',
+    companion: 'Gast',
+    companionDoc: 'Ausweisdokument',
+    remove: 'Entfernen',
+    legal: 'Die bereitgestellten Daten und Dokumente werden ausschließlich für die Erfüllung der Pflichten gemäß italienischem Recht (T.U.L.P.S. Art. 109, D.M. 7/1/2013) und zur Meldung an die Sicherheitsbehörden verwendet. Sie werden nicht an Dritte weitergegeben.',
+    submit: 'Dokumente senden',
+    successTitle: 'Dokumente erfolgreich übermittelt!',
+    successBody: 'Vielen Dank. Wir haben Ihre Dokumente erhalten. Wir sehen uns beim Check-in!',
+    errorTitle: 'Fehler beim Senden.',
+    errorBody: 'Bitte versuchen Sie es erneut oder kontaktieren Sie HelloHomeRent.',
+    validationMsg: 'Bitte füllen Sie alle Pflichtfelder aus und laden Sie das Dokument des Hauptgastes hoch.',
+  }
+};
+
+let currentLang = 'it';
+let guestCount = 0;
+const filesMap = {}; // zone-id -> FileList
+
+function setLang(lang) {
+  currentLang = lang;
+  document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
+  document.querySelector(`.lang-pill:nth-child(${lang==='it'?1:lang==='en'?2:3})`).classList.add('active');
+  const t = TRANSLATIONS[lang];
+
+  document.getElementById('page-title').textContent = t.pageTitle;
+  document.getElementById('page-subtitle').textContent = t.pageSubtitle;
+  document.getElementById('s1-title').textContent = t.s1;
+  document.getElementById('s2-title').textContent = t.s2;
+  document.getElementById('s3-title').textContent = t.s3;
+  document.getElementById('l-property').textContent = t.property;
+  document.getElementById('l-checkin').textContent = t.checkin;
+  document.getElementById('l-checkout').textContent = t.checkout;
+  document.getElementById('l-numguests').textContent = t.numguests;
+  document.getElementById('l-firstname').textContent = t.firstname;
+  document.getElementById('l-lastname').textContent = t.lastname;
+  document.getElementById('l-email').textContent = t.email;
+  document.getElementById('l-phone').textContent = t.phone;
+  document.getElementById('l-doc-main').textContent = t.docMain;
+  document.getElementById('l-upload-main').textContent = t.uploadMain;
+  document.getElementById('l-upload-sub').textContent = t.uploadSub;
+  document.getElementById('l-add-guest').textContent = t.addGuest;
+  document.getElementById('legal-note').textContent = t.legal;
+  document.getElementById('submit-text').textContent = t.submit;
+
+  // update companions
+  document.querySelectorAll('.companion-title').forEach((el, i) => {
+    el.textContent = `${t.companion} ${i + 2}`;
+  });
+  document.querySelectorAll('.companion-doc-label').forEach(el => {
+    el.textContent = t.companionDoc;
+  });
+  document.querySelectorAll('.remove-guest-btn').forEach(el => {
+    el.textContent = `✕ ${t.remove}`;
+  });
+  document.querySelectorAll('.companion-upload-main').forEach(el => el.textContent = t.uploadMain);
+  document.querySelectorAll('.companion-upload-sub').forEach(el => el.textContent = t.uploadSub);
+}
+
+// ── File handling ─────────────────────────────────────────────────────
+function handleFiles(input, zoneId, listId) {
+  filesMap[input.id] = filesMap[input.id] || [];
+  Array.from(input.files).forEach(f => {
+    if (f.size > 10 * 1024 * 1024) { alert(`File troppo grande: ${f.name}`); return; }
+    filesMap[input.id].push(f);
+  });
+  renderFileList(input.id, listId);
+  updateProgress();
+}
+
+function renderFileList(inputId, listId) {
+  const list = document.getElementById(listId);
+  if (!list) return;
+  const files = filesMap[inputId] || [];
+  list.innerHTML = files.map((f, i) => `
+    <div class="file-item">
+      <span>📄</span>
+      <span class="file-name">${f.name}</span>
+      <span class="file-size">${(f.size/1024).toFixed(0)} KB</span>
+      <span class="remove-file" onclick="removeFile('${inputId}','${listId}',${i})">✕</span>
+    </div>
+  `).join('');
+}
+
+function removeFile(inputId, listId, idx) {
+  if (filesMap[inputId]) filesMap[inputId].splice(idx, 1);
+  renderFileList(inputId, listId);
+  updateProgress();
+}
+
+function handleDragOver(e, zoneId) {
+  e.preventDefault();
+  document.getElementById(zoneId).classList.add('dragover');
+}
+function handleDragLeave(zoneId) {
+  document.getElementById(zoneId).classList.remove('dragover');
+}
+function handleDrop(e, inputId) {
+  e.preventDefault();
+  const zoneId = e.currentTarget.id;
+  document.getElementById(zoneId).classList.remove('dragover');
+  const dt = e.dataTransfer;
+  const input = document.getElementById(inputId);
+  // Fake the file input
+  filesMap[inputId] = filesMap[inputId] || [];
+  Array.from(dt.files).forEach(f => {
+    if (f.size > 10 * 1024 * 1024) return;
+    filesMap[inputId].push(f);
+  });
+  const listId = 'files-' + inputId.replace('-doc','').replace('doc-','');
+  renderFileList(inputId, 'files-' + inputId.replace(/-doc$/,'').replace(/^doc-/,''));
+  updateProgress();
+}
+
+// ── Guest management ─────────────────────────────────────────────────
+function addGuest() {
+  guestCount++;
+  const idx = guestCount;
+  const t = TRANSLATIONS[currentLang];
+  const container = document.getElementById('companions-container');
+  const zoneId = `zone-g${idx}`;
+  const inputId = `doc-g${idx}`;
+  const listId = `files-g${idx}`;
+
+  const div = document.createElement('div');
+  div.className = 'guest-section';
+  div.id = `guest-${idx}`;
+  div.innerHTML = `
+    <div class="guest-header">
+      <h3 class="companion-title">${t.companion} ${idx + 1}</h3>
+      <button type="button" class="remove-guest-btn" onclick="removeGuest(${idx})">✕ ${t.remove}</button>
+    </div>
+    <div class="guest-body">
+      <div class="field-row">
+        <div class="field-group">
+          <label><span id="l-gfn${idx}">${t.firstname}</span></label>
+          <input type="text" name="guest_${idx}_firstname" placeholder="">
+        </div>
+        <div class="field-group">
+          <label><span id="l-gln${idx}">${t.lastname}</span></label>
+          <input type="text" name="guest_${idx}_lastname" placeholder="">
+        </div>
+      </div>
+      <div class="field-row full">
+        <div class="field-group">
+          <label><span class="companion-doc-label">${t.companionDoc}</span></label>
+          <div class="upload-zone" id="${zoneId}" ondragover="handleDragOver(event,'${zoneId}')" ondragleave="handleDragLeave('${zoneId}')" ondrop="handleDrop(event,'${inputId}')">
+            <input type="file" id="${inputId}" name="${inputId}" accept=".jpg,.jpeg,.png,.pdf" multiple onchange="handleFiles(this,'${zoneId}','${listId}')">
+            <div class="upload-icon">📎</div>
+            <div class="upload-label-main companion-upload-main">${t.uploadMain}</div>
+            <div class="upload-label-sub companion-upload-sub">${t.uploadSub}</div>
+          </div>
+          <div class="file-list" id="${listId}"></div>
+        </div>
+      </div>
+    </div>
+  `;
+  container.appendChild(div);
+  updateProgress();
+}
+
+function removeGuest(idx) {
+  const el = document.getElementById(`guest-${idx}`);
+  if (el) el.remove();
+  updateProgress();
+}
+
+// ── Progress ─────────────────────────────────────────────────────────
+function updateProgress() {
+  const required = ['property','checkin','num-guests','firstname','lastname','email','phone'];
+  let filled = required.filter(id => document.getElementById(id)?.value.trim()).length;
+  const hasMainDoc = (filesMap['main-doc'] || []).length > 0;
+  if (hasMainDoc) filled++;
+  const total = required.length + 1;
+  const pct = Math.round((filled / total) * 100);
+  document.getElementById('progress').style.width = pct + '%';
+}
+
+document.addEventListener('input', updateProgress);
+
+// ── Submit ────────────────────────────────────────────────────────────
+// IMPORTANT: replace SCRIPT_URL with your deployed Google Apps Script URL
+const SCRIPT_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+document.getElementById('mainForm').addEventListener('submit', async function(e) {
+  e.preventDefault();
+  const t = TRANSLATIONS[currentLang];
+
+  // Validation
+  const required = ['property','checkin','num-guests','firstname','lastname','email','phone'];
+  const missing = required.filter(id => !document.getElementById(id)?.value.trim());
+  if (missing.length > 0 || (filesMap['main-doc'] || []).length === 0) {
+    showAlert('error', t.errorTitle, t.validationMsg);
+    return;
+  }
+
+  // Build FormData
+  const fd = new FormData();
+  fd.append('lang', currentLang);
+  fd.append('property', document.getElementById('property').value);
+  fd.append('checkin', document.getElementById('checkin').value);
+  fd.append('checkout', document.getElementById('checkout').value || '');
+  fd.append('num_guests', document.getElementById('num-guests').value);
+  fd.append('firstname', document.getElementById('firstname').value);
+  fd.append('lastname', document.getElementById('lastname').value);
+  fd.append('email', document.getElementById('email').value);
+  fd.append('phone', document.getElementById('phone').value);
+
+  // Main doc files
+  (filesMap['main-doc'] || []).forEach(f => fd.append('main_doc', f));
+
+  // Companion files
+  for (let i = 1; i <= guestCount; i++) {
+    const fn = document.querySelector(`[name="guest_${i}_firstname"]`)?.value || '';
+    const ln = document.querySelector(`[name="guest_${i}_lastname"]`)?.value || '';
+    fd.append(`guest_${i}_name`, `${fn} ${ln}`.trim());
+    (filesMap[`doc-g${i}`] || []).forEach(f => fd.append(`doc_g${i}`, f));
+  }
+  fd.append('guestCount', guestCount);
+
+  // Send
+  setLoading(true);
+  hideAlerts();
+
+  try {
+    const res = await fetch(SCRIPT_URL, { method: 'POST', body: fd });
+    const data = await res.json();
+    if (data.result === 'success') {
+      document.getElementById('mainForm').style.display = 'none';
+      showAlert('success', t.successTitle, t.successBody);
+    } else {
+      throw new Error(data.error || 'unknown');
+    }
+  } catch (err) {
+    showAlert('error', t.errorTitle, t.errorBody + ' (' + err.message + ')');
+  } finally {
+    setLoading(false);
+  }
+});
+
+function setLoading(on) {
+  const btn = document.getElementById('submit-btn');
+  const txt = document.getElementById('submit-text');
+  const sp = document.getElementById('spinner');
+  btn.disabled = on;
+  txt.style.display = on ? 'none' : 'inline';
+  sp.style.display = on ? 'block' : 'none';
+}
+
+function showAlert(type, title, body) {
+  const el = document.getElementById(`alert-${type}`);
+  document.getElementById(`${type}-title`).textContent = title;
+  document.getElementById(`${type}-body`).textContent = body;
+  el.classList.add('show');
+  el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+function hideAlerts() {
+  document.getElementById('alert-success').classList.remove('show');
+  document.getElementById('alert-error').classList.remove('show');
+}
+</script>
+</body>
+</html>
