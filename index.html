@@ -38,7 +38,6 @@
     min-height: 100vh;
   }
 
-  /* Background texture */
   body::before {
     content: '';
     position: fixed;
@@ -58,7 +57,6 @@
     padding: 48px 24px 80px;
   }
 
-  /* ── Header ── */
   .header {
     text-align: center;
     margin-bottom: 48px;
@@ -99,10 +97,8 @@
 
   .house:nth-child(1) .house-roof { border-left-width: 7px; border-right-width: 7px; border-bottom-width: 6px; }
   .house:nth-child(1) .house-body { width: 12px; height: 9px; }
-
   .house:nth-child(2) .house-roof { border-left-width: 9px; border-right-width: 9px; border-bottom-width: 8px; }
   .house:nth-child(2) .house-body { width: 16px; height: 11px; }
-
   .house:nth-child(3) .house-roof { border-left-width: 7px; border-right-width: 7px; border-bottom-width: 6px; }
   .house:nth-child(3) .house-body { width: 12px; height: 9px; }
 
@@ -149,10 +145,7 @@
     background: var(--border);
   }
 
-  .lang-pills {
-    display: flex;
-    gap: 6px;
-  }
+  .lang-pills { display: flex; gap: 6px; }
 
   .lang-pill {
     font-size: 11px;
@@ -173,7 +166,6 @@
     border-color: var(--gold);
   }
 
-  /* ── Form card ── */
   .form-card {
     background: var(--white);
     border: 0.5px solid var(--border);
@@ -211,9 +203,7 @@
     letter-spacing: 0.02em;
   }
 
-  .form-card-body {
-    padding: 24px;
-  }
+  .form-card-body { padding: 24px; }
 
   .field-row {
     display: grid;
@@ -267,7 +257,6 @@
 
   select { cursor: pointer; }
 
-  /* ── Upload zone ── */
   .upload-zone {
     border: 1px dashed var(--border);
     border-radius: var(--radius-lg);
@@ -293,30 +282,11 @@
     height: 100%;
   }
 
-  .upload-icon {
-    font-size: 28px;
-    margin-bottom: 8px;
-    color: var(--gold);
-  }
+  .upload-icon { font-size: 28px; margin-bottom: 8px; color: var(--gold); }
+  .upload-label-main { font-size: 13px; font-weight: 500; color: var(--ink-soft); margin-bottom: 4px; }
+  .upload-label-sub { font-size: 11px; color: var(--ink-muted); }
 
-  .upload-label-main {
-    font-size: 13px;
-    font-weight: 500;
-    color: var(--ink-soft);
-    margin-bottom: 4px;
-  }
-
-  .upload-label-sub {
-    font-size: 11px;
-    color: var(--ink-muted);
-  }
-
-  .file-list {
-    margin-top: 10px;
-    display: flex;
-    flex-direction: column;
-    gap: 6px;
-  }
+  .file-list { margin-top: 10px; display: flex; flex-direction: column; gap: 6px; }
 
   .file-item {
     display: flex;
@@ -335,7 +305,6 @@
   .file-item .remove-file { color: var(--ink-muted); cursor: pointer; font-size: 14px; flex-shrink: 0; }
   .file-item .remove-file:hover { color: var(--error); }
 
-  /* ── Guest repeat section ── */
   .guest-section {
     border: 0.5px solid var(--border-soft);
     border-radius: var(--radius-lg);
@@ -376,10 +345,7 @@
     letter-spacing: 0.02em;
   }
 
-  .add-guest-btn:hover {
-    background: var(--gold-pale);
-    border-color: var(--gold);
-  }
+  .add-guest-btn:hover { background: var(--gold-pale); border-color: var(--gold); }
 
   .remove-guest-btn {
     background: none;
@@ -394,7 +360,6 @@
 
   .remove-guest-btn:hover { color: var(--error); background: var(--error-bg); }
 
-  /* ── Submit ── */
   .submit-area { margin-top: 24px; }
 
   .legal-note {
@@ -442,7 +407,6 @@
 
   @keyframes spin { to { transform: rotate(360deg); } }
 
-  /* ── Success / Error messages ── */
   .alert {
     border-radius: var(--radius-lg);
     padding: 16px 20px;
@@ -458,17 +422,9 @@
 
   .success-icon { font-size: 24px; margin-bottom: 8px; }
 
-  /* ── Footer ── */
-  .footer {
-    text-align: center;
-    margin-top: 40px;
-    font-size: 11px;
-    color: var(--ink-muted);
-  }
-
+  .footer { text-align: center; margin-top: 40px; font-size: 11px; color: var(--ink-muted); }
   .footer a { color: var(--gold); text-decoration: none; }
 
-  /* ── Progress bar ── */
   .progress-bar {
     height: 2px;
     background: var(--border-soft);
@@ -489,7 +445,6 @@
 <body>
 <div class="page-wrapper">
 
-  <!-- Header -->
   <header class="header">
     <div class="logo-mark">
       <div class="logo-houses">
@@ -499,12 +454,10 @@
       </div>
       <div class="logo-text">Hello<span>Home</span>Rent</div>
     </div>
-
     <h1 class="header-title" id="page-title">Registrazione Ospiti</h1>
     <p class="header-subtitle" id="page-subtitle">
       Carica un documento d'identità valido per ogni ospite. I dati sono trattati nel rispetto della normativa vigente ai sensi del T.U.L.P.S.
     </p>
-
     <div class="lang-divider">
       <div class="lang-pills">
         <button class="lang-pill active" onclick="setLang('it')">IT</button>
@@ -518,7 +471,6 @@
 
   <form id="mainForm" novalidate>
 
-    <!-- Sezione 1: Prenotazione -->
     <div class="form-card">
       <div class="form-card-header">
         <div class="section-icon">①</div>
@@ -548,7 +500,6 @@
       </div>
     </div>
 
-    <!-- Sezione 2: Intestatario -->
     <div class="form-card">
       <div class="form-card-header">
         <div class="section-icon">②</div>
@@ -590,7 +541,6 @@
       </div>
     </div>
 
-    <!-- Sezione 3: Accompagnatori -->
     <div class="form-card">
       <div class="form-card-header">
         <div class="section-icon">③</div>
@@ -604,7 +554,6 @@
       </div>
     </div>
 
-    <!-- Submit -->
     <div class="submit-area">
       <p class="legal-note" id="legal-note">
         I dati e i documenti forniti sono utilizzati esclusivamente per gli adempimenti previsti dalla normativa italiana (T.U.L.P.S. art. 109, D.M. 7/1/2013) e per la comunicazione alle autorità di pubblica sicurezza. Non vengono ceduti a terzi.
@@ -634,107 +583,66 @@
 </div>
 
 <script>
-// ── i18n ──────────────────────────────────────────────────────────────
 const TRANSLATIONS = {
   it: {
     pageTitle: 'Registrazione Ospiti',
     pageSubtitle: 'Carica un documento d\'identità valido per ogni ospite. I dati sono trattati nel rispetto della normativa vigente ai sensi del T.U.L.P.S.',
-    s1: 'Dettagli Prenotazione',
-    s2: 'Intestatario Prenotazione',
-    s3: 'Accompagnatori',
-    property: 'Struttura',
-    checkin: 'Data check-in',
-    checkout: 'Data check-out',
-    numguests: 'N° totale ospiti',
-    firstname: 'Nome',
-    lastname: 'Cognome',
-    email: 'Email',
-    phone: 'Telefono',
-    docMain: 'Documento d\'identità',
-    uploadMain: 'Trascina qui o clicca per caricare',
-    uploadSub: 'JPG, PNG o PDF – max 10 MB per file',
-    addGuest: 'Aggiungi accompagnatore',
-    companion: 'Accompagnatore',
-    companionDoc: 'Documento d\'identità',
+    s1: 'Dettagli Prenotazione', s2: 'Intestatario Prenotazione', s3: 'Accompagnatori',
+    property: 'Struttura', checkin: 'Data check-in', checkout: 'Data check-out',
+    numguests: 'N° totale ospiti', firstname: 'Nome', lastname: 'Cognome',
+    email: 'Email', phone: 'Telefono', docMain: 'Documento d\'identità',
+    uploadMain: 'Trascina qui o clicca per caricare', uploadSub: 'JPG, PNG o PDF – max 10 MB per file',
+    addGuest: 'Aggiungi accompagnatore', companion: 'Accompagnatore', companionDoc: 'Documento d\'identità',
     remove: 'Rimuovi',
     legal: 'I dati e i documenti forniti sono utilizzati esclusivamente per gli adempimenti previsti dalla normativa italiana (T.U.L.P.S. art. 109, D.M. 7/1/2013) e per la comunicazione alle autorità di pubblica sicurezza. Non vengono ceduti a terzi.',
-    submit: 'Invia Documenti',
-    successTitle: 'Documenti inviati con successo!',
+    submit: 'Invia Documenti', successTitle: 'Documenti inviati con successo!',
     successBody: 'Grazie. Abbiamo ricevuto i tuoi documenti. Ci vediamo al check-in!',
-    errorTitle: 'Errore nell\'invio.',
-    errorBody: 'Riprova o contatta HelloHomeRent.',
+    errorTitle: 'Errore nell\'invio.', errorBody: 'Riprova o contatta HelloHomeRent.',
     validationMsg: 'Compila tutti i campi obbligatori e carica il documento dell\'intestatario.',
   },
   en: {
     pageTitle: 'Guest Registration',
     pageSubtitle: 'Please upload a valid ID document for each guest. Data is processed in compliance with applicable Italian law (T.U.L.P.S.).',
-    s1: 'Booking Details',
-    s2: 'Lead Guest',
-    s3: 'Additional Guests',
-    property: 'Property',
-    checkin: 'Check-in date',
-    checkout: 'Check-out date',
-    numguests: 'Total guests',
-    firstname: 'First name',
-    lastname: 'Last name',
-    email: 'Email',
-    phone: 'Phone',
-    docMain: 'Identity document',
-    uploadMain: 'Drag & drop or click to upload',
-    uploadSub: 'JPG, PNG or PDF – max 10 MB per file',
-    addGuest: 'Add guest',
-    companion: 'Guest',
-    companionDoc: 'Identity document',
+    s1: 'Booking Details', s2: 'Lead Guest', s3: 'Additional Guests',
+    property: 'Property', checkin: 'Check-in date', checkout: 'Check-out date',
+    numguests: 'Total guests', firstname: 'First name', lastname: 'Last name',
+    email: 'Email', phone: 'Phone', docMain: 'Identity document',
+    uploadMain: 'Drag & drop or click to upload', uploadSub: 'JPG, PNG or PDF – max 10 MB per file',
+    addGuest: 'Add guest', companion: 'Guest', companionDoc: 'Identity document',
     remove: 'Remove',
     legal: 'The data and documents provided are used exclusively for compliance with Italian law (T.U.L.P.S. art. 109, D.M. 7/1/2013) and reporting to public security authorities. They are not shared with third parties.',
-    submit: 'Submit Documents',
-    successTitle: 'Documents submitted successfully!',
+    submit: 'Submit Documents', successTitle: 'Documents submitted successfully!',
     successBody: 'Thank you. We have received your documents. See you at check-in!',
-    errorTitle: 'Submission error.',
-    errorBody: 'Please try again or contact HelloHomeRent.',
+    errorTitle: 'Submission error.', errorBody: 'Please try again or contact HelloHomeRent.',
     validationMsg: 'Please fill all required fields and upload the lead guest\'s document.',
   },
   de: {
     pageTitle: 'Gästeregistrierung',
     pageSubtitle: 'Bitte laden Sie für jeden Gast ein gültiges Ausweisdokument hoch. Die Daten werden gemäß dem italienischen Gesetz (T.U.L.P.S.) verarbeitet.',
-    s1: 'Buchungsdetails',
-    s2: 'Hauptgast',
-    s3: 'Weitere Gäste',
-    property: 'Unterkunft',
-    checkin: 'Check-in-Datum',
-    checkout: 'Check-out-Datum',
-    numguests: 'Anzahl Gäste gesamt',
-    firstname: 'Vorname',
-    lastname: 'Nachname',
-    email: 'E-Mail',
-    phone: 'Telefon',
-    docMain: 'Ausweisdokument',
-    uploadMain: 'Hier ablegen oder klicken zum Hochladen',
-    uploadSub: 'JPG, PNG oder PDF – max. 10 MB pro Datei',
-    addGuest: 'Weiteren Gast hinzufügen',
-    companion: 'Gast',
-    companionDoc: 'Ausweisdokument',
+    s1: 'Buchungsdetails', s2: 'Hauptgast', s3: 'Weitere Gäste',
+    property: 'Unterkunft', checkin: 'Check-in-Datum', checkout: 'Check-out-Datum',
+    numguests: 'Anzahl Gäste gesamt', firstname: 'Vorname', lastname: 'Nachname',
+    email: 'E-Mail', phone: 'Telefon', docMain: 'Ausweisdokument',
+    uploadMain: 'Hier ablegen oder klicken zum Hochladen', uploadSub: 'JPG, PNG oder PDF – max. 10 MB pro Datei',
+    addGuest: 'Weiteren Gast hinzufügen', companion: 'Gast', companionDoc: 'Ausweisdokument',
     remove: 'Entfernen',
     legal: 'Die bereitgestellten Daten und Dokumente werden ausschließlich für die Erfüllung der Pflichten gemäß italienischem Recht (T.U.L.P.S. Art. 109, D.M. 7/1/2013) und zur Meldung an die Sicherheitsbehörden verwendet. Sie werden nicht an Dritte weitergegeben.',
-    submit: 'Dokumente senden',
-    successTitle: 'Dokumente erfolgreich übermittelt!',
+    submit: 'Dokumente senden', successTitle: 'Dokumente erfolgreich übermittelt!',
     successBody: 'Vielen Dank. Wir haben Ihre Dokumente erhalten. Wir sehen uns beim Check-in!',
-    errorTitle: 'Fehler beim Senden.',
-    errorBody: 'Bitte versuchen Sie es erneut oder kontaktieren Sie HelloHomeRent.',
+    errorTitle: 'Fehler beim Senden.', errorBody: 'Bitte versuchen Sie es erneut oder kontaktieren Sie HelloHomeRent.',
     validationMsg: 'Bitte füllen Sie alle Pflichtfelder aus und laden Sie das Dokument des Hauptgastes hoch.',
   }
 };
 
 let currentLang = 'it';
 let guestCount = 0;
-const filesMap = {}; // zone-id -> FileList
+const filesMap = {};
 
 function setLang(lang) {
   currentLang = lang;
   document.querySelectorAll('.lang-pill').forEach(p => p.classList.remove('active'));
   document.querySelector(`.lang-pill:nth-child(${lang==='it'?1:lang==='en'?2:3})`).classList.add('active');
   const t = TRANSLATIONS[lang];
-
   document.getElementById('page-title').textContent = t.pageTitle;
   document.getElementById('page-subtitle').textContent = t.pageSubtitle;
   document.getElementById('s1-title').textContent = t.s1;
@@ -754,22 +662,13 @@ function setLang(lang) {
   document.getElementById('l-add-guest').textContent = t.addGuest;
   document.getElementById('legal-note').textContent = t.legal;
   document.getElementById('submit-text').textContent = t.submit;
-
-  // update companions
-  document.querySelectorAll('.companion-title').forEach((el, i) => {
-    el.textContent = `${t.companion} ${i + 2}`;
-  });
-  document.querySelectorAll('.companion-doc-label').forEach(el => {
-    el.textContent = t.companionDoc;
-  });
-  document.querySelectorAll('.remove-guest-btn').forEach(el => {
-    el.textContent = `✕ ${t.remove}`;
-  });
+  document.querySelectorAll('.companion-title').forEach((el, i) => { el.textContent = `${t.companion} ${i + 2}`; });
+  document.querySelectorAll('.companion-doc-label').forEach(el => { el.textContent = t.companionDoc; });
+  document.querySelectorAll('.remove-guest-btn').forEach(el => { el.textContent = `✕ ${t.remove}`; });
   document.querySelectorAll('.companion-upload-main').forEach(el => el.textContent = t.uploadMain);
   document.querySelectorAll('.companion-upload-sub').forEach(el => el.textContent = t.uploadSub);
 }
 
-// ── File handling ─────────────────────────────────────────────────────
 function handleFiles(input, zoneId, listId) {
   filesMap[input.id] = filesMap[input.id] || [];
   Array.from(input.files).forEach(f => {
@@ -811,20 +710,15 @@ function handleDrop(e, inputId) {
   e.preventDefault();
   const zoneId = e.currentTarget.id;
   document.getElementById(zoneId).classList.remove('dragover');
-  const dt = e.dataTransfer;
-  const input = document.getElementById(inputId);
-  // Fake the file input
   filesMap[inputId] = filesMap[inputId] || [];
-  Array.from(dt.files).forEach(f => {
+  Array.from(e.dataTransfer.files).forEach(f => {
     if (f.size > 10 * 1024 * 1024) return;
     filesMap[inputId].push(f);
   });
-  const listId = 'files-' + inputId.replace('-doc','').replace('doc-','');
   renderFileList(inputId, 'files-' + inputId.replace(/-doc$/,'').replace(/^doc-/,''));
   updateProgress();
 }
 
-// ── Guest management ─────────────────────────────────────────────────
 function addGuest() {
   guestCount++;
   const idx = guestCount;
@@ -833,7 +727,6 @@ function addGuest() {
   const zoneId = `zone-g${idx}`;
   const inputId = `doc-g${idx}`;
   const listId = `files-g${idx}`;
-
   const div = document.createElement('div');
   div.className = 'guest-section';
   div.id = `guest-${idx}`;
@@ -845,12 +738,12 @@ function addGuest() {
     <div class="guest-body">
       <div class="field-row">
         <div class="field-group">
-          <label><span id="l-gfn${idx}">${t.firstname}</span></label>
-          <input type="text" name="guest_${idx}_firstname" placeholder="">
+          <label><span>${t.firstname}</span></label>
+          <input type="text" name="guest_${idx}_firstname">
         </div>
         <div class="field-group">
-          <label><span id="l-gln${idx}">${t.lastname}</span></label>
-          <input type="text" name="guest_${idx}_lastname" placeholder="">
+          <label><span>${t.lastname}</span></label>
+          <input type="text" name="guest_${idx}_lastname">
         </div>
       </div>
       <div class="field-row full">
@@ -877,28 +770,37 @@ function removeGuest(idx) {
   updateProgress();
 }
 
-// ── Progress ─────────────────────────────────────────────────────────
 function updateProgress() {
   const required = ['property','checkin','num-guests','firstname','lastname','email','phone'];
   let filled = required.filter(id => document.getElementById(id)?.value.trim()).length;
   const hasMainDoc = (filesMap['main-doc'] || []).length > 0;
   if (hasMainDoc) filled++;
   const total = required.length + 1;
-  const pct = Math.round((filled / total) * 100);
-  document.getElementById('progress').style.width = pct + '%';
+  document.getElementById('progress').style.width = Math.round((filled / total) * 100) + '%';
 }
 
 document.addEventListener('input', updateProgress);
 
-// ── Submit ────────────────────────────────────────────────────────────
-// IMPORTANT: replace SCRIPT_URL with your deployed Google Apps Script URL
+// ── SUBMIT con base64 ─────────────────────────────────────────────────
 const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyB3hKMk11QjJauikP7nJJ17asC-fs8zkJmdWP6-VZAfL5KwG8Lb1xNUKqqVweBl7o4/exec';
+
+async function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve({
+      name: file.name,
+      type: file.type,
+      data: reader.result.split(',')[1]
+    });
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
 
 document.getElementById('mainForm').addEventListener('submit', async function(e) {
   e.preventDefault();
   const t = TRANSLATIONS[currentLang];
 
-  // Validation
   const required = ['property','checkin','num-guests','firstname','lastname','email','phone'];
   const missing = required.filter(id => !document.getElementById(id)?.value.trim());
   if (missing.length > 0 || (filesMap['main-doc'] || []).length === 0) {
@@ -906,37 +808,43 @@ document.getElementById('mainForm').addEventListener('submit', async function(e)
     return;
   }
 
-  // Build FormData
-  const fd = new FormData();
-  fd.append('lang', currentLang);
-  fd.append('property', document.getElementById('property').value);
-  fd.append('checkin', document.getElementById('checkin').value);
-  fd.append('checkout', document.getElementById('checkout').value || '');
-  fd.append('num_guests', document.getElementById('num-guests').value);
-  fd.append('firstname', document.getElementById('firstname').value);
-  fd.append('lastname', document.getElementById('lastname').value);
-  fd.append('email', document.getElementById('email').value);
-  fd.append('phone', document.getElementById('phone').value);
-
-  // Main doc files
-  (filesMap['main-doc'] || []).forEach(f => fd.append('main_doc', f));
-
-  // Companion files
-  for (let i = 1; i <= guestCount; i++) {
-    const fn = document.querySelector(`[name="guest_${i}_firstname"]`)?.value || '';
-    const ln = document.querySelector(`[name="guest_${i}_lastname"]`)?.value || '';
-    fd.append(`guest_${i}_name`, `${fn} ${ln}`.trim());
-    (filesMap[`doc-g${i}`] || []).forEach(f => fd.append(`doc_g${i}`, f));
-  }
-  fd.append('guestCount', guestCount);
-
-  // Send
   setLoading(true);
   hideAlerts();
 
   try {
-    const res = await fetch(SCRIPT_URL, { method: 'POST', body: fd });
+    // Converti file principale in base64
+    const mainDocs = await Promise.all((filesMap['main-doc'] || []).map(fileToBase64));
+
+    // Converti file accompagnatori in base64
+    const companions = [];
+    for (let i = 1; i <= guestCount; i++) {
+      const fn = document.querySelector(`[name="guest_${i}_firstname"]`)?.value || '';
+      const ln = document.querySelector(`[name="guest_${i}_lastname"]`)?.value || '';
+      const docs = await Promise.all((filesMap[`doc-g${i}`] || []).map(fileToBase64));
+      companions.push({ name: `${fn} ${ln}`.trim(), docs });
+    }
+
+    const payload = {
+      lang: currentLang,
+      property: document.getElementById('property').value,
+      checkin: document.getElementById('checkin').value,
+      checkout: document.getElementById('checkout').value || '',
+      num_guests: document.getElementById('num-guests').value,
+      firstname: document.getElementById('firstname').value,
+      lastname: document.getElementById('lastname').value,
+      email: document.getElementById('email').value,
+      phone: document.getElementById('phone').value,
+      guestCount,
+      mainDocs,
+      companions
+    };
+
+    const res = await fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify(payload)
+    });
     const data = await res.json();
+
     if (data.result === 'success') {
       document.getElementById('mainForm').style.display = 'none';
       showAlert('success', t.successTitle, t.successBody);
@@ -951,12 +859,9 @@ document.getElementById('mainForm').addEventListener('submit', async function(e)
 });
 
 function setLoading(on) {
-  const btn = document.getElementById('submit-btn');
-  const txt = document.getElementById('submit-text');
-  const sp = document.getElementById('spinner');
-  btn.disabled = on;
-  txt.style.display = on ? 'none' : 'inline';
-  sp.style.display = on ? 'block' : 'none';
+  document.getElementById('submit-btn').disabled = on;
+  document.getElementById('submit-text').style.display = on ? 'none' : 'inline';
+  document.getElementById('spinner').style.display = on ? 'block' : 'none';
 }
 
 function showAlert(type, title, body) {
